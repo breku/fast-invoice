@@ -1,4 +1,4 @@
-package com.brekol;
+package com.brekol.input.model;
 
 /**
  * Created by brekol on 17.01.16.

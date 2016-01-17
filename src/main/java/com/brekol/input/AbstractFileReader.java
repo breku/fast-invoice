@@ -1,4 +1,4 @@
-package com.brekol;
+package com.brekol.input;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;

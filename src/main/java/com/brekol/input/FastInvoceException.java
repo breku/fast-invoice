@@ -1,4 +1,4 @@
-package com.brekol;
+package com.brekol.input;
 
 import java.io.IOException;
 

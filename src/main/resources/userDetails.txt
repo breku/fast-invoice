@@ -1,1 +1,5 @@
 numerUmowy=38/2014/CONSDATA/JB
+companyName=Software Development mgr inż. Jakub Bręk
+address=ul. Naramowicka 47C/12, 61-622 Poznań
+nip=7651652664
+phoneNumber=695917174

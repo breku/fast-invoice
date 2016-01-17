@@ -1,5 +1,7 @@
-package com.brekol;
+package com.brekol.input;
 
+import com.brekol.input.AbstractFileReader;
+import com.brekol.input.model.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Properties;

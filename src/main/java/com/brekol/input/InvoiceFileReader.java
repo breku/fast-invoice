@@ -1,17 +1,13 @@
-package com.brekol;
+package com.brekol.input;
 
-import com.google.common.base.Charsets;
+import com.brekol.input.model.InvoiceDetails;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +15,7 @@ import java.util.List;
  * Created by brekol on 17.01.16.
  */
 @Service
-public class InvoiceFileReader extends AbstractFileReader{
+public class InvoiceFileReader extends AbstractFileReader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InvoiceFileReader.class);
 

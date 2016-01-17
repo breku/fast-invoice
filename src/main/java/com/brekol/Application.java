@@ -1,5 +1,10 @@
 package com.brekol;
 
+import com.brekol.input.InvoiceFileReader;
+import com.brekol.input.UserDetailsFileReader;
+import com.brekol.input.model.InvoiceDetails;
+import com.brekol.input.model.UserDetails;
+import com.brekol.output.PdfService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +28,16 @@ public class Application {
     @Autowired
     private UserDetailsFileReader userDetailsFileReader;
 
+    @Autowired
+    private PdfService pdfService;
+
     public void execute(String[] args) {
         LOGGER.info(">> Starting application.");
 
         inputValidator.validateInput(args);
         final List<InvoiceDetails> invoiceDetailsList = invoiceFileReader.getInvoiceDetailsList(args[0]);
         final UserDetails userDetails = userDetailsFileReader.getUserDetails(args[1]);
+        pdfService.createPdfs(invoiceDetailsList, userDetails);
 
         LOGGER.info("<< Finished.");
     }
