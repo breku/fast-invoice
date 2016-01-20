@@ -89,7 +89,7 @@ public class PdfService {
         table.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.setWidthPercentage(100);
 
-        final PdfPCell pdfCell = createPdfCellWithoutBorder("Razem do zapłaty");
+        final PdfPCell pdfCell = createPdfCellWithoutBorder("Razem do zapłaty: " + calculateTotalValue(invoiceDetails) + " PLN");
         pdfCell.setColspan(4);
         table.addCell(pdfCell);
 
