@@ -76,9 +76,28 @@ public class PdfService {
             document.add(createDatesAndBankAccountTable(userDetails));
             createLineSeparator(document);
             document.add(createPaymentTable(invoiceDetails));
+            document.add(Chunk.NEWLINE);
+            document.add(createSummary(invoiceDetails));
         } catch (DocumentException e) {
             LOGGER.error("Error during generatring pdf", e);
         }
+    }
+
+    private Element createSummary(InvoiceDetails invoiceDetails) {
+//        final PdfPTable table = new PdfPTable(new float[]{15f, 3f, 3f, 3f, 3f, 3f});
+        final PdfPTable table = new PdfPTable(new float[]{2f, 12f, 5f, 5f, 5f, 5f, 5f, 5f,});
+        table.setHorizontalAlignment(Element.ALIGN_LEFT);
+        table.setWidthPercentage(100);
+
+        final PdfPCell pdfCell = createPdfCellWithoutBorder("Razem do zapłaty");
+        pdfCell.setColspan(4);
+        table.addCell(pdfCell);
+
+        table.addCell(createPdfCellWithoutBorderWithCenterAlignment(invoiceDetails.getValue()));
+        table.addCell(createPdfCellWithoutBorderWithCenterAlignment("23%"));
+        table.addCell(createPdfCellWithoutBorderWithCenterAlignment(calculateValueWithVat(invoiceDetails.getValue())));
+        table.addCell(createPdfCellWithoutBorderWithCenterAlignment(calculateTotalValue(invoiceDetails)));
+        return table;
     }
 
     private Element createPaymentTable(InvoiceDetails invoiceDetails) {
@@ -179,6 +198,12 @@ public class PdfService {
         table.addCell(createPdfCellWithoutBorder("+48 61 41 51 000"));
         table.completeRow();
         return table;
+    }
+
+    private PdfPCell createPdfCellWithoutBorderWithCenterAlignment(String text) {
+        PdfPCell result = createPdfCellWithoutBorder(text);
+        result.setHorizontalAlignment(Element.ALIGN_CENTER);
+        return result;
     }
 
     private PdfPCell createPdfCellWithoutBorder(String text) {
