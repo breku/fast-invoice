@@ -1,13 +1,12 @@
 package com.brekol.input;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.ByteSource;
 import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
@@ -30,25 +29,15 @@ public abstract class AbstractFileReader {
     }
 
     protected Properties getFileAsProperties(String fileName) {
-        final URL url = Resources.getResource(fileName);
-        final ByteSource byteSource = Resources.asByteSource(url);
-        final Properties properties = new Properties();
-        InputStream inputStream = null;
         try {
-            inputStream = byteSource.openBufferedStream();
-            properties.load(inputStream);
+            final URL url = Resources.getResource(fileName);
+            final String fileAsString = Resources.toString(url, Charsets.UTF_8);
+            final Properties properties = new Properties();
+            properties.load(new StringReader(fileAsString));
             return properties;
         } catch (final IOException e) {
             LOGGER.error("Error during reading a file", fileName);
             throw new FastInvoceException(e.getMessage(), e);
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (final IOException ioException) {
-                    ioException.printStackTrace();
-                }
-            }
         }
     }
 }

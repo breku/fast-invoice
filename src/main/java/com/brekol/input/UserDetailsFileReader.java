@@ -1,6 +1,5 @@
 package com.brekol.input;
 
-import com.brekol.input.AbstractFileReader;
 import com.brekol.input.model.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +11,18 @@ import java.util.Properties;
 @Service
 public class UserDetailsFileReader extends AbstractFileReader {
     private static final String AGREEMENT_NUMBER_KEY = "numerUmowy";
+    private static final String COMPANY_NAME_KEY = "companyName";
+    private static final String ADDRESS_KEY = "address";
+    private static final String NIP_KEY = "nip";
+    private static final String PHONE_NUMBER_KEY = "phoneNumber";
 
     public UserDetails getUserDetails(String fileName) {
         final Properties properties = getFileAsProperties(fileName);
-        return new UserDetails(properties.getProperty(AGREEMENT_NUMBER_KEY));
+        final String agreementNumber = properties.getProperty(AGREEMENT_NUMBER_KEY);
+        final String companyName = properties.getProperty(COMPANY_NAME_KEY);
+        final String address = properties.getProperty(ADDRESS_KEY);
+        final String nip = properties.getProperty(NIP_KEY);
+        final String phoneNumber = properties.getProperty(PHONE_NUMBER_KEY);
+        return new UserDetails(agreementNumber, companyName, address, nip, phoneNumber);
     }
 }
