@@ -10,11 +10,12 @@ import java.util.Properties;
  */
 @Service
 public class UserDetailsFileReader extends AbstractFileReader {
-    private static final String AGREEMENT_NUMBER_KEY = "numerUmowy";
+    private static final String AGREEMENT_NUMBER_KEY = "agreementNumber";
     private static final String COMPANY_NAME_KEY = "companyName";
     private static final String ADDRESS_KEY = "address";
     private static final String NIP_KEY = "nip";
     private static final String PHONE_NUMBER_KEY = "phoneNumber";
+    private static final String BANK_ACCOUNT_NUMBER_KEY = "bankAccountNumber";
 
     public UserDetails getUserDetails(String fileName) {
         final Properties properties = getFileAsProperties(fileName);
@@ -23,6 +24,7 @@ public class UserDetailsFileReader extends AbstractFileReader {
         final String address = properties.getProperty(ADDRESS_KEY);
         final String nip = properties.getProperty(NIP_KEY);
         final String phoneNumber = properties.getProperty(PHONE_NUMBER_KEY);
-        return new UserDetails(agreementNumber, companyName, address, nip, phoneNumber);
+        final String bankAccountNumber = properties.getProperty(BANK_ACCOUNT_NUMBER_KEY);
+        return new UserDetails(agreementNumber, companyName, address, nip, phoneNumber, bankAccountNumber);
     }
 }

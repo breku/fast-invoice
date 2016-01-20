@@ -10,13 +10,24 @@ public class UserDetails {
     private String address;
     private String nip;
     private String phoneNumber;
+    private String bankAccountNumber;
 
-    public UserDetails(String agreementNumber, String companyName, String address, String nip, String phoneNumber) {
+    public UserDetails(String agreementNumber, String companyName, String address, String nip, String phoneNumber, String
+            bankAccountNumber) {
         this.agreementNumber = agreementNumber;
         this.companyName = companyName;
         this.address = address;
         this.nip = nip;
         this.phoneNumber = phoneNumber;
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
     }
 
     public String getCompanyName() {
