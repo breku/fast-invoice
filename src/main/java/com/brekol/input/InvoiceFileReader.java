@@ -43,8 +43,13 @@ public class InvoiceFileReader extends AbstractFileReader {
         final String salary = getValueFromLinesSplitOnSpace(SALARY_INDEX, lines);
         final String invoiceValue = getValueFromLines(INVOICE_VALUE_INDEX, lines);
         final String projectName = Iterables.getLast(Splitter.on(" ").splitToList(name));
-        return new InvoiceDetails(number, name, numberOfDays, salary, invoiceValue, projectName);
+        return new InvoiceDetails(number, name, replaceCommaWithDot(numberOfDays), replaceCommaWithDot(salary), replaceCommaWithDot(invoiceValue), projectName);
     }
+
+    private String replaceCommaWithDot(String input) {
+        return input.replace(",", ".");
+    }
+
 
     private String getValueFromLinesSplitOnSpace(final int index, List<String> lines) {
         final List<String> strings = Splitter.on(" ").trimResults().splitToList(lines.get(index));
