@@ -1,0 +1,78 @@
+Zestawienie prac wykonanych w projektach:
+_________________________________________________
+Projekt:            052_E05
+Ilość godzin:            58,08
+Stawka w projekcie:        10,00
+Wynagrodzenie z projektu:    11,11
+_________________________________________________
+Projekt:            054_S03
+Ilość godzin:            2,25
+Stawka w projekcie:        10,00
+Wynagrodzenie z projektu:    22,22
+_________________________________________________
+Projekt:            049_E04
+Ilość godzin:            13
+Stawka w projekcie:        10,00
+Wynagrodzenie z projektu:   22,2
+_________________________________________________
+Projekt:            045_S02
+Ilość godzin:            34,25
+Stawka w projekcie:        10,00
+Wynagrodzenie z projektu:   25,5
+_________________________________________________
+Projekt:            024_I01
+Ilość godzin:            56,42
+Stawka w projekcie:        10,00
+Wynagrodzenie z projektu:    4,8
+_________________________________________________
+Razem wynagrodzenie z projektów:44,8
+
+
+_________________________________________________
+Pozostałe dane
+Ilość dni roboczych w mc:    20
+Liczba godzin razem:        22,00
+% etatu:            102,50%
+
+
+_________________________________________________
+Rozliczenie dodatków
+Benefit:            72,00
+Suma dodatków-potracenia:    72,00
+
+
+
+Prosze o wystawienie nastepujących faktur:
+_________________________________________________
+Faktura nr:        1
+Pozycja:        Wykonanie usług informatycznych wg. umowy w projekcie 052_E05
+Ilość dni:        7,34
+Stawka            10,00
+Wartość fv:        11,80
+_________________________________________________
+Faktura nr:        2
+Pozycja:        Wykonanie usług informatycznych wg. umowy w projekcie 054_S03
+Ilość dni:        0,28
+Stawka            10,00
+Wartość fv:        58,60
+_________________________________________________
+Faktura nr:        3
+Pozycja:        Wykonanie usług informatycznych wg. umowy w projekcie 049_E04
+Ilość dni:        1,64
+Stawka            10,00
+Wartość fv:        45,80
+_________________________________________________
+Faktura nr:        4
+Pozycja:        Wykonanie usług informatycznych wg. umowy w projekcie 045_S02
+Ilość dni:        4,33
+Stawka            10,00
+Wartość fv:        57,60
+_________________________________________________
+Faktura nr:        5
+Pozycja:        Wykonanie usług informatycznych wg. umowy w projekcie 024_I01
+Ilość dni:        7,13
+Stawka            10,00
+Wartość fv:        12,60
+
+__________________________________________________
+Razem fv:        35,40
