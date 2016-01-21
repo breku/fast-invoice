@@ -6,35 +6,26 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * Created by brekol on 17.01.16.
  */
 @Service
-public class PdfService {
+public class PdfInvoiceService extends AbstractPdfService {
 
-    private static final int DEFAULT_FONT_SIZE = 12;
-    private static final Logger LOGGER = LoggerFactory.getLogger(PdfService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PdfInvoiceService.class);
     private static final double VAT_FACTOR = 0.23;
-    private Font font;
 
     public void createPdfs(List<InvoiceDetails> invoiceDetailsList, UserDetails userDetails) {
-        initializeFont();
         for (final InvoiceDetails invoiceDetails : invoiceDetailsList) {
             createPdf(invoiceDetails, userDetails);
         }
@@ -49,13 +40,11 @@ public class PdfService {
         return (double) tmp / factor;
     }
 
-    private void initializeFont() {
-        try {
-            final BaseFont bf = BaseFont.createFont("OpenSans-Light.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            font = new Font(bf, 12, Font.NORMAL);
-        } catch (DocumentException | IOException e) {
-            LOGGER.error("Error during font loading", e);
-        }
+    @Override
+    protected String getPdfFileName(UserDetails userDetails, InvoiceDetails invoiceDetails) {
+        final String filePrefix = Iterables.getLast(Splitter.on("/").split(userDetails.getAgreementNumber()));
+        final String result = Joiner.on("-").join(filePrefix, "faktura", invoiceDetails.getNumber());
+        return result + ".pdf";
     }
 
     private void createPdf(InvoiceDetails invoiceDetails, UserDetails userDetails) {
@@ -84,7 +73,6 @@ public class PdfService {
     }
 
     private Element createSummary(InvoiceDetails invoiceDetails) {
-//        final PdfPTable table = new PdfPTable(new float[]{15f, 3f, 3f, 3f, 3f, 3f});
         final PdfPTable table = new PdfPTable(new float[]{2f, 12f, 5f, 5f, 5f, 5f, 5f, 5f,});
         table.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.setWidthPercentage(100);
@@ -151,23 +139,6 @@ public class PdfService {
         return table;
     }
 
-    private void createLineSeparator(Document document) throws DocumentException {
-        document.add(new Chunk(new LineSeparator(0.2f, 100f, BaseColor.BLACK, Element.ALIGN_LEFT, 0)));
-    }
-
-    private void saveDocumentAsPdf(Document document, UserDetails userDetails, InvoiceDetails invoiceDetails) {
-        try {
-            PdfWriter.getInstance(document, new FileOutputStream(new File(getPdfFileName(userDetails, invoiceDetails))));
-        } catch (DocumentException | FileNotFoundException e) {
-            LOGGER.error("Error during getting instance of pdf writer (saving document)", e);
-        }
-    }
-
-    private String getPdfFileName(UserDetails userDetails, InvoiceDetails invoiceDetails) {
-        final String filePrefix = Iterables.getLast(Splitter.on("/").split(userDetails.getAgreementNumber()));
-        final String result = Joiner.on("-").join(filePrefix, "faktura", invoiceDetails.getNumber());
-        return result + ".pdf";
-    }
 
     private PdfPTable createSellerAndBuyerTable(UserDetails userDetails) {
         PdfPTable table = new PdfPTable(new float[]{7f, 10f, 5f, 5f, 12f});
@@ -212,24 +183,8 @@ public class PdfService {
         return result;
     }
 
-    private PdfPCell createPdfCell(String text) {
-        PdfPCell result = new PdfPCell(new Phrase(text, font));
-        result.setHorizontalAlignment(Element.ALIGN_CENTER);
-        result.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        return result;
-    }
 
-    private void addText(Document document, int aligment, String text) throws DocumentException {
-        final Paragraph paragraph = new Paragraph(text, font);
-        paragraph.setAlignment(aligment);
-        document.add(paragraph);
-    }
 
-    private String getLastDayOfPreviousMonth() {
-        final LocalDate today = new LocalDate();
-        final LocalDate shiftedDate = today.minusMonths(1);
-        return shiftedDate.getYear() + "/" + shiftedDate.getMonthOfYear() + "/" + shiftedDate.dayOfMonth().getMaximumValue();
-    }
 
     private String getHeader(InvoiceDetails invoiceDetails) {
         final LocalDate today = new LocalDate();

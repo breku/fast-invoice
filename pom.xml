@@ -11,20 +11,11 @@
     <dependencies>
 
         <!-- PDF -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.pdfbox</groupId>-->
-            <!--<artifactId>pdfbox</artifactId>-->
-            <!--<version>2.0.0-RC3</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.8</version>
         </dependency>
-
-
-
-
 
         <!-- Utils -->
         <dependency>
@@ -44,8 +35,6 @@
         </dependency>
 
 
-
-
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -57,9 +46,6 @@
             <artifactId>spring-context</artifactId>
             <version>4.2.4.RELEASE</version>
         </dependency>
-
-
-
 
 
         <!-- Logger -->
@@ -87,8 +73,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-
 
 
             <plugin>
